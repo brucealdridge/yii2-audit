@@ -122,7 +122,11 @@ class AuditTrailBehavior extends \yii\base\Behavior
             return;
         }
         // Now lets actually write the attributes
-        $this->auditAttributes($action);
+        try {
+            $this->auditAttributes($action);
+        } catch (\Exception $exception) {
+            // do nothing - something broke.
+        }
     }
 
     /**
